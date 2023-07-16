@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
+import toast from 'react-hot-toast';
 import {
   Button,
   Flex,
@@ -14,15 +15,12 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-  useToast,
 } from '@chakra-ui/react';
 import { AddIcon, PhoneIcon } from '@chakra-ui/icons';
 import { TiUser } from 'react-icons/ti';
-
-import ContactsTitle from 'components/ContactsTitle/ContactsTitle';
+import ContactsTitle from 'components/ContactsTitle';
 import { addContact } from 'redux/contacts/operationsContacts';
 import { selectContacts } from 'redux/contacts/selectorsContacts';
-
 
 export default function ContactForm() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,7 +30,6 @@ export default function ContactForm() {
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const toast = useToast();
 
   const nameInputId = nanoid();
   const numberInputId = nanoid();
@@ -62,12 +59,12 @@ export default function ContactForm() {
     );
 
     if (isFindName) {
-      toast({
-        title: `${name} is already in contacts !`,
-        status: 'error',
-        duration: 3000,
-        position: 'top-center',
-        isClosable: true,
+      toast(`${name} is already in contacts !`, {
+        style: {
+          borderRadius: '10px',
+          background: 'red',
+          color: '#fff',
+        },
       });
       return;
     } else {
@@ -90,7 +87,7 @@ export default function ContactForm() {
 
   return (
     <>
-      <Flex gap={10} justify='start' align='end' mb={8}>
+      <Flex gap={10} justify="start" align="end" mb={8}>
         <ContactsTitle title="My Contacts" />
         <Button onClick={onOpen} colorScheme="messenger">
           <AddIcon boxSize={4} />
@@ -146,7 +143,7 @@ export default function ContactForm() {
                 />
               </InputGroup>
 
-              <Flex justify='flex-end' gap={6}>
+              <Flex justify="flex-end" gap={6}>
                 <Button type="submit" colorScheme="messenger" size="md">
                   Save
                 </Button>

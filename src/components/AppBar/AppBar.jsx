@@ -1,8 +1,8 @@
-import { Navigation } from '../Navigation/Navigation';
-import UserMenu from '../UserMenu/UserMenu';
-import AuthNav from '../AuthNav';
-import { useAuth } from 'hooks';
 import { Flex } from '@chakra-ui/react';
+import { useAuth } from 'hooks';
+import Navigation from '../Navigation';
+import UserMenu from '../UserMenu';
+import AuthNav from '../AuthNav';
 
 const AppBar = () => {
   const { isLoggedIn } = useAuth();

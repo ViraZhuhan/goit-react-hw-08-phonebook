@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
 
- const AuthNav = () => {
+const AuthNav = () => {
   return (
     <Breadcrumb>
       <BreadcrumbItem isCurrentPage>

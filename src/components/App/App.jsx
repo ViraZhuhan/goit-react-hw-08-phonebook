@@ -5,10 +5,10 @@ import { ChakraProvider, Container } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/react';
 import { useAuth } from 'hooks';
 import Layout from 'components/Layout';
+import NotFound from 'pages/NotFound';
 import { PrivateRoute } from 'components/PrivateRoute';
 import { RestrictedRoute } from 'components/RestrictedRoute';
 import { refreshUser } from 'redux/auth/operationsAuth';
-import NotFound from 'pages/NotFound';
 
 const HomePage = lazy(() => import('pages/Home'));
 const RegisterPage = lazy(() => import('pages/Register'));
@@ -24,47 +24,50 @@ export const App = () => {
   }, [dispatch]);
 
   return isRefreshing ? (
-  
-<Spinner
+    <Spinner
       thickness="4px"
       speed="0.65s"
       emptyColor="gray.200"
       color="blue.500"
       size="xl"
     />
-  ) : ( <Container p={20} >
-<ChakraProvider>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route
-            path="/register"
-            element={
-              <RestrictedRoute
-                redirectTo="/contacts"
-                component={<RegisterPage />}
-              />
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <RestrictedRoute
-                redirectTo="/contacts"
-                component={<LoginPage />}
-              />
-            }
-          />
-          <Route
-            path="/contacts"
-            element={
-              <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
-            }
-          />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </ChakraProvider>
-   </Container>
+  ) : (
+    <Container p={20}>
+      <ChakraProvider>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route
+              path="/register"
+              element={
+                <RestrictedRoute
+                  redirectTo="/contacts"
+                  component={<RegisterPage />}
+                />
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <RestrictedRoute
+                  redirectTo="/contacts"
+                  component={<LoginPage />}
+                />
+              }
+            />
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<ContactsPage />}
+                />
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </ChakraProvider>
+    </Container>
   );
 };

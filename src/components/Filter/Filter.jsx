@@ -1,7 +1,7 @@
-import { filterContacts } from 'redux/filter/sliceFilter';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
+import { filterContacts } from 'redux/filter/sliceFilter';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const Filter = () => {
   };
 
   return (
-    <InputGroup mb='8'>
+    <InputGroup mb="8">
       <InputLeftElement pointerEvents="none">
         <SearchIcon />
       </InputLeftElement>
